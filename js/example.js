@@ -55,10 +55,10 @@ var Harvest = (function () {
 
 		// Boxes
 		var boxGeometry = new THREE.BoxGeometry( 20, 20, 20 );
-		var boxTexture1 = new THREE.ImageUtils.loadTexture("img/cc/block1.jpg");
-		var boxTexture2 = new THREE.ImageUtils.loadTexture("img/cc/block2.jpg");
-		var boxTexture3 = new THREE.ImageUtils.loadTexture("img/cc/block3.jpg");
-		var boxTexture4 = new THREE.ImageUtils.loadTexture("img/cc/block4.jpg");
+		var boxTexture1 = new THREE.ImageUtils.loadTexture("img/block1.jpg");
+		var boxTexture2 = new THREE.ImageUtils.loadTexture("img/block2.jpg");
+		var boxTexture3 = new THREE.ImageUtils.loadTexture("img/block3.jpg");
+		var boxTexture4 = new THREE.ImageUtils.loadTexture("img/block4.jpg");
 		var boxMaterial1 = new THREE.MeshBasicMaterial( {map: boxTexture1, reflectivity: 0.8} );
 		var boxMaterial2 = new THREE.MeshBasicMaterial( {map: boxTexture2, reflectivity: 0.8} );
 		var boxMaterial3 = new THREE.MeshBasicMaterial( {map: boxTexture3, reflectivity: 0.8} );
