@@ -223,7 +223,7 @@ THREE.PointerLockControls = function ( camera, mass, playerHeight, doubleJump, w
 					setTimeout(function() { scope.justCrouched = false; }, 300);
 				}
 
-			} else if (!scope.crouching && smoothedHeight <= (playerHeight - 5) ){
+			} else if (!scope.crouching && smoothedHeight <= (playerHeight - playerHeight / 2) ){
 
 				smoothedHeight = scope.getObject().position.y + crouchSmoothing;
 				scope.updatePlayerHeight(smoothedHeight);
