@@ -82,7 +82,7 @@ var Harvest = (function () {
 
 		camera = new THREE.PerspectiveCamera( 80, window.innerWidth / window.innerHeight, 1, 9000 );
 		controls = new THREE.PointerLockControls( camera, 100, 30, true, objects );
-		scene.add( controls.getObject() );
+		scene.add( controls.getPlayer() );
 
 		renderer = new THREE.WebGLRenderer({ antialias: true }); //new THREE.WebGLRenderer();
 		renderer.setClearColor( 0xffffff );
@@ -139,22 +139,22 @@ var Harvest = (function () {
 		switch(keyCode) {
 			case 38: // up
 			case 87: // w
-				controls.moveForward = boolean;
+				controls.movements.forward = boolean;
 				break;
 
 			case 40: // down
 			case 83: // s
-				controls.moveBackward = boolean;
+				controls.movements.backward = boolean;
 				break;
 
 			case 37: // left
 			case 65: // a
-				controls.moveLeft = boolean;
+				controls.movements.left = boolean;
 				break;
 
 			case 39: // right
 			case 68: // d
-				controls.moveRight = boolean;
+				controls.movements.right = boolean;
 				break;
 
 			case 32: // space
