@@ -34,5 +34,9 @@ Then in your animation loop you just need to call the update controls method:
 controls.updateControls();
 ```
 
+# Contributing
+
+I would love contributions! Both in the form of issues, feature requests, usage examples and of course pull requests.
+
 # License
 MIT
