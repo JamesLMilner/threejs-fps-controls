@@ -174,6 +174,8 @@ THREE.PointerLockControls = function ( camera, mass, playerHeight, doubleJump, w
 
 	// Crouched
 	scope.crouching = false;
+	var halfHeight;
+	var fullHeight;
 	var crouchSmoothing;
 	var smoothedHeight;
 	var crouched = false;
@@ -231,23 +233,32 @@ THREE.PointerLockControls = function ( camera, mass, playerHeight, doubleJump, w
 				scope.jumps = 0;
 
 				//If we start to fall through an object
-				if ((this.getPlayer().position.y  < playerHeight) &&
-					 scope.downwardsIntersection &&
-					 scope.downwardsIntersection[0].distance < (playerHeight / 2) ) {
-
-					 this.getPlayer().position.y += 0.1;
-				}
+				// if ((this.getPlayer().position.y  < playerHeight) &&
+				// 	 scope.downwardsIntersection &&
+				// 	 scope.downwardsIntersection[0].distance < (playerHeight / 2) ) {
+				//
+				// 	 this.getPlayer().position.y += 0.1;
+				// }
 
 			} else {
 				this.walking = false;
 			}
 
 			// Crouched
+
+
+
+			if (!crouched && scope.isOnObject) {
+				console.log("Not Crouched");
+				halfHeight = scope.getPlayer().position.y - (playerHeight * 0.2);
+				fullHeight = scope.getPlayer().position.y + (playerHeight * 0.2);
+			}
+
 			if (scope.crouching && scope.isOnObject) {
 
 				scope.walking = true;
 				if (!crouched && !scope.justCrouched) {
-					scope.updatePlayerHeight(scope.getPlayer().position.y - (playerHeight * 0.2));
+					scope.updatePlayerHeight(halfHeight);
 					crouchSmoothing = 0;
 					smoothedHeight = 0;
 					crouched = true;
@@ -257,11 +268,14 @@ THREE.PointerLockControls = function ( camera, mass, playerHeight, doubleJump, w
 					setTimeout(function() { scope.justCrouched = false; }, 300);
 				}
 
-			} else if (!scope.crouching && smoothedHeight <= (playerHeight - playerHeight / 2) ){
+			} else if (!scope.crouching && smoothedHeight <= fullHeight ){
 
-				smoothedHeight = scope.getPlayer().position.y + crouchSmoothing;
+				// Smooth out of crouching
+				console.log("finished");
+				smoothedHeight = halfHeight + crouchSmoothing;
 				scope.updatePlayerHeight(smoothedHeight);
-				crouchSmoothing += 0.333;
+				crouchSmoothing += 2;
+					//console.log(smoothedHeight)
 				crouched = false;
 				scope.walking = false;
 
@@ -275,6 +289,7 @@ THREE.PointerLockControls = function ( camera, mass, playerHeight, doubleJump, w
 
 				if (scope.jumps === 0 && !scope.isBelowObject) {
 					scope.velocity.y += scope.jumpFactor * 2.3;
+					scope.velocity.z *= 2; // Jumping also increases our forward velocity a little
 					scope.jumps = 1;
 				}
 				else if (scope.doubleJump && scope.jumps === 1 && !scope.isOnObject && !scope.isBelowObject) {
