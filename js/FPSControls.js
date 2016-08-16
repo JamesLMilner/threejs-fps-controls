@@ -14,6 +14,11 @@ THREE.PointerLockControls = function ( camera, mass, playerHeight, doubleJump, w
 	pitchObject.add( camera );
 
 	var yawObject = new THREE.Object3D();
+
+	// move camera's position/offset to yawObject
+	yawObject.position.copy(camera.position);
+	camera.position.set(0, 0, 0);
+
 	yawObject.position.y = playerHeight;
 	yawObject.add( pitchObject );
 
